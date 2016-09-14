@@ -1,0 +1,5 @@
+1.config/mina文件夹改名为:config/deal
+2.sysconfig.properties改为dealConfig.properties
+3.config/spring加两个目录:back和front
+4.加了几个middle的文件夹,表示贷中
+5.改变了MINA端口的获取,可配置化:/EDAI/src/com/edai/mina/TcpMinaServer.java

@@ -1,0 +1,22 @@
+stages:
+  - review
+
+variables:
+  BRANCH_WEEKLY : "weekly"
+  BRANCH_DEVELOP : "develop"
+  BRANCH_MASTER : "master"
+  GITLAB_API_TOKEN: "sUjPyxm6ETayAA75S_SV"
+    
+reverse_merge_from_develop:
+  stage: review
+  only:
+    - develop
+  script:
+    curl -d source_branch=$CI_BUILD_REF_NAME -d target_branch=$BRANCH_WEEKLY -d title=reverse_merge_From_$CI_BUILD_REF_NAME-to-$BRANCH_WEEKLY -d description=default "https://code.houbank.net/api/v3/projects/$CI_PROJECT_ID/merge_requests/?private_token=$GITLAB_API_TOKEN"
+
+reverse_merge_from_master:
+  stage: review
+  only:
+    - master
+  script:
+    curl -d source_branch=$CI_BUILD_REF_NAME -d target_branch=$BRANCH_DEVELOP -d title=reverse_merge_From_$CI_BUILD_REF_NAME-to-$BRANCH_DEVELOP -d description=default "https://code.houbank.net/api/v3/projects/$CI_PROJECT_ID/merge_requests/?private_token=$GITLAB_API_TOKEN"
